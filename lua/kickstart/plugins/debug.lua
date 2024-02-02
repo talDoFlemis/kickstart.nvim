@@ -13,6 +13,12 @@ return {
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
+    {
+      "theHamsta/nvim-dap-virtual-text",
+      config = function()
+        require("nvim-dap-virtual-text").setup()
+      end,
+    },
 
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',

@@ -88,7 +88,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -113,7 +113,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -189,20 +189,23 @@ require('lazy').setup({
     },
   },
 
+  -- Theme
   {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
+    "catppuccin/nvim",
+    name = "catppuccin",
     priority = 1000,
     lazy = false,
     config = function()
-      require('onedark').setup {
-        -- Set a style preset. 'dark' is default.
-        style = 'dark', -- dark, darker, cool, deep, warm, warmer, light
-      }
-      require('onedark').load()
-    end,
+      require("catppuccin").setup({
+        flavour = "macchiato",
+        transparent_background = true,
+        integrations = {
+          notify = true,
+        },
+      })
+      vim.cmd.colorscheme "catppuccin"
+    end
   },
-
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -220,10 +223,14 @@ require('lazy').setup({
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
+    tag = 'v3.5.2',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
     main = 'ibl',
     opts = {},
+    config = function()
+      require("ibl").setup()
+    end,
   },
 
   -- "gc" to comment visual regions/lines
@@ -259,11 +266,214 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
+  -- Neotest
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "antoinemadec/FixCursorHold.nvim",
+      { "nvim-neotest/neotest-go", ft = { "go" } },
+    },
+    ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "rust", "go", "java" },
+    config = function()
+      require("neotest").setup {
+        icons = {
+          passed = "",
+          failed = "",
+          running = "",
+          skipped = "",
+          unknown = "",
+        },
+        adapters = {
+          require "rustaceanvim.neotest",
+          require "neotest-go",
+        },
+      }
+    end,
+  },
+  -- Lazygit
+  { "kdheepak/lazygit.nvim", event = "VeryLazy" },
+  -- Noice
+  {
+    "aserowy/tmux.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("tmux").setup {
+        copy_sync = {
+          enable = true,
+        },
+      }
+    end,
+  },
+  -- Tmux
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      presets = {
+        bottom_search = true,         -- use a classic bottom cmdline for search
+        command_palette = true,       -- position the cmdline and popupmenu together
+        long_message_to_split = true, -- long messages will be sent to a split
+        inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = false,       -- add a border to hover docs and signature help
+      },
+      messages = {
+        enabled = false,
+
+        view = "notify",             -- default view for messages
+        view_error = "notify",       -- view for errors
+        view_warn = "notify",        -- view for warnings
+        view_history = "messages",   -- view for :messages
+        view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+      },
+      routes = {
+        {
+          view = "notify",
+          filter = { event = "msg_showmode" },
+        },
+        opts = { skip = true },
+      },
+      lsp = {
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+
+        hover = {
+          enabled = false,
+        },
+        signature = {
+          enabled = false,
+        },
+      },
+    },
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+  },
+  -- Trouble
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+  -- Todo-comments
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("todo-comments").setup()
+    end,
+  },
+  -- Discord Presence
+  { "andweeb/presence.nvim", event = "VeryLazy" },
+  -- Nvim surround
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup()
+    end,
+  },
+  -- Sonarlint
+  {
+    "https://gitlab.com/schrieveslaach/sonarlint.nvim",
+    dependencies = {
+      "williamboman/mason.nvim",
+    },
+    ft = {
+      "python",
+      "go",
+      "cpp",
+      "dockerfile",
+      "yaml",
+      "yml",
+      "terraform",
+    },
+    config = function()
+      local mason_path = os.getenv "MASON"
+      require("sonarlint").setup {
+        server = {
+          cmd = {
+            "sonarlint-language-server",
+            "-stdio",
+            "-analyzers",
+            vim.fn.expand(mason_path .. "/share/sonarlint-analyzers/sonarpython.jar"),
+            vim.fn.expand(mason_path .. "/share/sonarlint-analyzers/sonarcfamily.jar"),
+            vim.fn.expand(mason_path .. "/share/sonarlint-analyzers/sonargo.jar"),
+            vim.fn.expand(mason_path .. "/share/sonarlint-analyzers/sonariac.jar"),
+          },
+        },
+        filetypes = {
+          "python",
+          "go",
+          "cpp",
+          "dockerfile",
+          "yaml",
+          "yml",
+          "terraform",
+        },
+      }
+    end,
+  },
+  -- Dadbod
+  {
+    "tpope/vim-dadbod",
+    cmd = { "DBUIToggle", "DBUIAddConnection", "DBUI", "DBUIFindBuffer", "DBUIRenameBuffer" },
+    dependencies = {
+      "kristijanhusak/vim-dadbod-ui",
+      {
+        "kristijanhusak/vim-dadbod-completion",
+        dependencies = {
+          "hrsh7th/nvim-cmp",
+        },
+      },
+    },
+  },
+  -- Rust
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^4',
+    ft = { 'rust' },
+  },
+  {
+    "saecki/crates.nvim",
+    event = { "BufRead Cargo.toml" },
+    requires = { { "nvim-lua/plenary.nvim" } },
+    config = function()
+      require("crates").setup()
+    end,
+  },
+  -- Copilot
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup {
+        suggestion = {
+          auto_trigger = true,
+        },
+      }
+    end,
+    dependencies = {
+      {
+        "zbirenbaum/copilot-cmp",
+        config = function()
+          require("copilot_cmp").setup()
+        end,
+      },
+    },
+  },
+
+
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
   -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -314,6 +524,21 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+-- Set relative numbers
+vim.opt.relativenumber = true
+
+vim.filetype.add {
+  pattern = {
+    [".*/.*playbook.*.ya?ml"] = "yaml.ansible",
+    [".*/.*tasks.*/.*ya?ml"] = "yaml.ansible",
+    [".*/local.ya?ml"] = "yaml.ansible",
+    ["*.templ"] = "templ",
+  },
+}
+
+-- Set max column size for better space
+vim.opt.colorcolumn = "100"
 
 -- [[ Basic Keymaps ]]
 
@@ -421,6 +646,9 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>gg', ':LazyGit<cr>', { desc = 'Open LazyGit' })
+vim.keymap.set('n', '<leader>fm', ':Format<cr>', { desc = 'Format' })
+
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -428,7 +656,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', "dockerfile", "json", "java", "sql", "terraform" },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -661,7 +889,10 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
+    { name = 'copilot' },
     { name = 'nvim_lsp' },
+    { name = "crates" },
+    { name = "vim-dadbod-completion" },
     { name = 'luasnip' },
     { name = 'path' },
   },
