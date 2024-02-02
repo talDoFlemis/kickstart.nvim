@@ -898,5 +898,10 @@ cmp.setup {
   },
 }
 
+-- Tests mappings
+vim.keymap.set('n', '<leader>tf', ':lua require("neotest").run.run(vim.fn.expand("%"))<cr>', { desc = 'Test file' })
+vim.keymap.set('n', '<leader>tn', ':lua require("neotest").run.run()<cr>', { desc = 'Test nearest test' })
+vim.keymap.set('n', '<leader>ts', ':lua require("neotest").summary.toggle()<cr>', { desc = 'Test nearest test' })
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
