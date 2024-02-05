@@ -191,20 +191,20 @@ require('lazy').setup({
 
   -- Theme
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    'catppuccin/nvim',
+    name = 'catppuccin',
     priority = 1000,
     lazy = false,
     config = function()
-      require("catppuccin").setup({
-        flavour = "macchiato",
+      require('catppuccin').setup {
+        flavour = 'macchiato',
         transparent_background = true,
         integrations = {
           notify = true,
         },
-      })
-      vim.cmd.colorscheme "catppuccin"
-    end
+      }
+      vim.cmd.colorscheme 'catppuccin'
+    end,
   },
   {
     -- Set lualine as statusline
@@ -229,7 +229,7 @@ require('lazy').setup({
     main = 'ibl',
     opts = {},
     config = function()
-      require("ibl").setup()
+      require('ibl').setup()
     end,
   },
 
@@ -268,36 +268,36 @@ require('lazy').setup({
 
   -- Neotest
   {
-    "nvim-neotest/neotest",
+    'nvim-neotest/neotest',
     dependencies = {
-      "antoinemadec/FixCursorHold.nvim",
-      { "nvim-neotest/neotest-go", ft = { "go" } },
+      'antoinemadec/FixCursorHold.nvim',
+      { 'nvim-neotest/neotest-go', ft = { 'go' } },
     },
-    ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "rust", "go", "java" },
+    ft = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'rust', 'go', 'java' },
     config = function()
-      require("neotest").setup {
+      require('neotest').setup {
         icons = {
-          passed = "",
-          failed = "",
-          running = "",
-          skipped = "",
-          unknown = "",
+          passed = '',
+          failed = '',
+          running = '',
+          skipped = '',
+          unknown = '',
         },
         adapters = {
-          require "rustaceanvim.neotest",
-          require "neotest-go",
+          require 'rustaceanvim.neotest',
+          require 'neotest-go',
         },
       }
     end,
   },
   -- Lazygit
-  { "kdheepak/lazygit.nvim", event = "VeryLazy" },
+  { 'kdheepak/lazygit.nvim', event = 'VeryLazy' },
   -- Noice
   {
-    "aserowy/tmux.nvim",
-    event = "VeryLazy",
+    'aserowy/tmux.nvim',
+    event = 'VeryLazy',
     config = function()
-      require("tmux").setup {
+      require('tmux').setup {
         copy_sync = {
           enable = true,
         },
@@ -306,8 +306,8 @@ require('lazy').setup({
   },
   -- Tmux
   {
-    "folke/noice.nvim",
-    event = "VeryLazy",
+    'folke/noice.nvim',
+    event = 'VeryLazy',
     opts = {
       presets = {
         bottom_search = true,         -- use a classic bottom cmdline for search
@@ -319,24 +319,24 @@ require('lazy').setup({
       messages = {
         enabled = false,
 
-        view = "notify",             -- default view for messages
-        view_error = "notify",       -- view for errors
-        view_warn = "notify",        -- view for warnings
-        view_history = "messages",   -- view for :messages
-        view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+        view = 'notify',             -- default view for messages
+        view_error = 'notify',       -- view for errors
+        view_warn = 'notify',        -- view for warnings
+        view_history = 'messages',   -- view for :messages
+        view_search = 'virtualtext', -- view for search count messages. Set to `false` to disable
       },
       routes = {
         {
-          view = "notify",
-          filter = { event = "msg_showmode" },
+          view = 'notify',
+          filter = { event = 'msg_showmode' },
         },
         opts = { skip = true },
       },
       lsp = {
         override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
+          ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+          ['vim.lsp.util.stylize_markdown'] = true,
+          ['cmp.entry.get_documentation'] = true,
         },
 
         hover = {
@@ -348,85 +348,85 @@ require('lazy').setup({
       },
     },
     dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
+      'MunifTanjim/nui.nvim',
+      'rcarriga/nvim-notify',
     },
   },
   -- Trouble
   {
-    "folke/trouble.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    'folke/trouble.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
   -- Todo-comments
   {
-    "folke/todo-comments.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    'folke/todo-comments.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
-      require("todo-comments").setup()
+      require('todo-comments').setup()
     end,
   },
   -- Discord Presence
-  { "andweeb/presence.nvim", event = "VeryLazy" },
+  { 'andweeb/presence.nvim', event = 'VeryLazy' },
   -- Nvim surround
   {
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
+    'kylechui/nvim-surround',
+    version = '*', -- Use for stability; omit to use `main` branch for the latest features
+    event = 'VeryLazy',
     config = function()
-      require("nvim-surround").setup()
+      require('nvim-surround').setup()
     end,
   },
   -- Sonarlint
   {
-    "https://gitlab.com/schrieveslaach/sonarlint.nvim",
+    'https://gitlab.com/schrieveslaach/sonarlint.nvim',
     dependencies = {
-      "williamboman/mason.nvim",
+      'williamboman/mason.nvim',
     },
     ft = {
-      "python",
-      "go",
-      "cpp",
-      "dockerfile",
-      "yaml",
-      "yml",
-      "terraform",
+      'python',
+      'go',
+      'cpp',
+      'dockerfile',
+      'yaml',
+      'yml',
+      'terraform',
     },
     config = function()
-      local mason_path = os.getenv "MASON"
-      require("sonarlint").setup {
+      local mason_path = os.getenv 'MASON'
+      require('sonarlint').setup {
         server = {
           cmd = {
-            "sonarlint-language-server",
-            "-stdio",
-            "-analyzers",
-            vim.fn.expand(mason_path .. "/share/sonarlint-analyzers/sonarpython.jar"),
-            vim.fn.expand(mason_path .. "/share/sonarlint-analyzers/sonarcfamily.jar"),
-            vim.fn.expand(mason_path .. "/share/sonarlint-analyzers/sonargo.jar"),
-            vim.fn.expand(mason_path .. "/share/sonarlint-analyzers/sonariac.jar"),
+            'sonarlint-language-server',
+            '-stdio',
+            '-analyzers',
+            vim.fn.expand(mason_path .. '/share/sonarlint-analyzers/sonarpython.jar'),
+            vim.fn.expand(mason_path .. '/share/sonarlint-analyzers/sonarcfamily.jar'),
+            vim.fn.expand(mason_path .. '/share/sonarlint-analyzers/sonargo.jar'),
+            vim.fn.expand(mason_path .. '/share/sonarlint-analyzers/sonariac.jar'),
           },
         },
         filetypes = {
-          "python",
-          "go",
-          "cpp",
-          "dockerfile",
-          "yaml",
-          "yml",
-          "terraform",
+          'python',
+          'go',
+          'cpp',
+          'dockerfile',
+          'yaml',
+          'yml',
+          'terraform',
         },
       }
     end,
   },
   -- Dadbod
   {
-    "tpope/vim-dadbod",
-    cmd = { "DBUIToggle", "DBUIAddConnection", "DBUI", "DBUIFindBuffer", "DBUIRenameBuffer" },
+    'tpope/vim-dadbod',
+    cmd = { 'DBUIToggle', 'DBUIAddConnection', 'DBUI', 'DBUIFindBuffer', 'DBUIRenameBuffer' },
     dependencies = {
-      "kristijanhusak/vim-dadbod-ui",
+      'kristijanhusak/vim-dadbod-ui',
       {
-        "kristijanhusak/vim-dadbod-completion",
+        'kristijanhusak/vim-dadbod-completion',
         dependencies = {
-          "hrsh7th/nvim-cmp",
+          'hrsh7th/nvim-cmp',
         },
       },
     },
@@ -438,20 +438,20 @@ require('lazy').setup({
     ft = { 'rust' },
   },
   {
-    "saecki/crates.nvim",
-    event = { "BufRead Cargo.toml" },
-    requires = { { "nvim-lua/plenary.nvim" } },
+    'saecki/crates.nvim',
+    event = { 'BufRead Cargo.toml' },
+    requires = { { 'nvim-lua/plenary.nvim' } },
     config = function()
-      require("crates").setup()
+      require('crates').setup()
     end,
   },
   -- Copilot
   {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
+    'zbirenbaum/copilot.lua',
+    cmd = 'Copilot',
+    event = 'InsertEnter',
     config = function()
-      require("copilot").setup {
+      require('copilot').setup {
         suggestion = {
           auto_trigger = true,
         },
@@ -459,15 +459,82 @@ require('lazy').setup({
     end,
     dependencies = {
       {
-        "zbirenbaum/copilot-cmp",
+        'zbirenbaum/copilot-cmp',
         config = function()
-          require("copilot_cmp").setup()
+          require('copilot_cmp').setup()
         end,
       },
     },
   },
 
+  -- None_ls
+  {
+    'nvimtools/none-ls.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    config = function()
+      local null_ls = require 'null-ls'
+      local b = null_ls.builtins
+      local sources = {
+        --webdev
+        b.formatting.prettierd.with { extra_filetypes = { 'astro', 'ansible' } },
 
+        -- Python
+        b.diagnostics.ruff,
+        b.formatting.isort,
+        b.formatting.pyflyby,
+        b.formatting.ruff_format,
+
+        b.formatting.rustfmt,
+
+        -- Go
+        b.formatting.gofmt,
+        b.formatting.goimports_reviser,
+        b.formatting.golines,
+        b.code_actions.gomodifytags,
+        b.code_actions.impl,
+        b.diagnostics.golangci_lint,
+
+        -- Lua
+        b.formatting.stylua,
+
+        -- Shell
+        b.formatting.shfmt,
+        b.diagnostics.shellcheck.with { diagnostics_format = '#{m} [#{c}]' },
+
+        -- C#
+        b.formatting.csharpier,
+
+        b.formatting.ocamlformat,
+
+        -- sql
+        b.formatting.pg_format,
+
+        -- Dev OmegaLUL OPS
+        b.formatting.terraform_fmt,
+        b.diagnostics.terraform_validate,
+        b.diagnostics.ansiblelint,
+        b.diagnostics.tfsec,
+
+        -- Nix
+        b.formatting.nixfmt,
+      }
+
+      local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+      local on_attach = function(client, bufnr)
+        if client.supports_method 'textDocument/formatting' then
+          vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+        end
+      end
+
+      null_ls.setup {
+        debug = true,
+        sources = sources,
+        on_attach = on_attach,
+      }
+    end,
+  },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -530,15 +597,15 @@ vim.opt.relativenumber = true
 
 vim.filetype.add {
   pattern = {
-    [".*/.*playbook.*.ya?ml"] = "yaml.ansible",
-    [".*/.*tasks.*/.*ya?ml"] = "yaml.ansible",
-    [".*/local.ya?ml"] = "yaml.ansible",
-    ["*.templ"] = "templ",
+    ['.*/.*playbook.*.ya?ml'] = 'yaml.ansible',
+    ['.*/.*tasks.*/.*ya?ml'] = 'yaml.ansible',
+    ['.*/local.ya?ml'] = 'yaml.ansible',
+    ['*.templ'] = 'templ',
   },
 }
 
 -- Set max column size for better space
-vim.opt.colorcolumn = "100"
+vim.opt.colorcolumn = '100'
 
 -- [[ Basic Keymaps ]]
 
@@ -636,19 +703,18 @@ local function telescope_live_grep_open_files()
     prompt_title = 'Live Grep in Open Files',
   }
 end
-vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
-vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>f/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
+vim.keymap.set('n', '<leader>fs', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
+vim.keymap.set('n', '<leader>ff', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
+vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>fG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
+vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>fr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>gg', ':LazyGit<cr>', { desc = 'Open LazyGit' })
-vim.keymap.set('n', '<leader>fm', ':Format<cr>', { desc = 'Format' })
-
+vim.keymap.set('n', '<leader>fm', ':lua vim.lsp.buf.format()<cr>', { desc = 'Format' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -656,7 +722,25 @@ vim.keymap.set('n', '<leader>fm', ':Format<cr>', { desc = 'Format' })
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', "dockerfile", "json", "java", "sql", "terraform" },
+    ensure_installed = {
+      'c',
+      'cpp',
+      'go',
+      'lua',
+      'python',
+      'rust',
+      'tsx',
+      'javascript',
+      'typescript',
+      'vimdoc',
+      'vim',
+      'bash',
+      'dockerfile',
+      'json',
+      'java',
+      'sql',
+      'terraform',
+    },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -891,8 +975,8 @@ cmp.setup {
   sources = {
     { name = 'copilot' },
     { name = 'nvim_lsp' },
-    { name = "crates" },
-    { name = "vim-dadbod-completion" },
+    { name = 'crates' },
+    { name = 'vim-dadbod-completion' },
     { name = 'luasnip' },
     { name = 'path' },
   },
