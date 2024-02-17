@@ -580,6 +580,15 @@ require('lazy').setup({
     dependencies = { { 'nvim-tree/nvim-web-devicons' } },
   },
 
+  -- Harpoon
+  {
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require('harpoon').setup {}
+    end,
+  },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -900,7 +909,7 @@ require('which-key').register {
   ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
   ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+  ['<leader>f'] = { name = '[F]ind', _ = 'which_key_ignore' },
   ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
 }
@@ -1030,11 +1039,29 @@ vim.keymap.set('n', '<leader>ts', ':lua require("neotest").summary.toggle()<cr>'
 -- Trouble mappings
 vim.keymap.set('n', '<leader>tr', ':TroubleToggle<cr>', { desc = 'Trouble Toggle' })
 
--- Lsp Mappings
+-- Lsp Mappigs
 vim.keymap.set('n', '<leader>fr', require('telescope.builtin').lsp_references, { desc = '[F]ind [R]eferences' })
 vim.keymap.set('n', '<leader>fi', require('telescope.builtin').lsp_implementations, { desc = '[F]ind [I]mplementation' })
 vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
-vim.keymap.set('n', '<leader>fs', require('telescope.builtin').lsp_workspace_symbols, { desc = '[F]ind [S]ymbols' })
+vim.keymap.set('n', '<leader>fs', require('telescope.builtin').lsp_dynamic_workspace_symbols, { desc = '[F]ind [S]ymbols' })
+vim.keymap.set('n', '<leader>fic', require('telescope.builtin').lsp_incoming_calls, { desc = '[F]ind [I]ncoming [C]alls' })
+vim.keymap.set('n', '<leader>foc', require('telescope.builtin').lsp_outgoing_calls, { desc = '[F]ind [O]utgoing [C]alls' })
+
+-- Harpoon mappings
+local harpoon = require 'harpoon'
+vim.keymap.set('n', '<leader>ha', function()
+  harpoon:list():append()
+end)
+vim.keymap.set('n', '<C-e>', function()
+  harpoon.ui:toggle_quick_menu(harpoon:list())
+end, { desc = 'Open harpoon window' })
+vim.keymap.set('n', '<C-n>', function()
+  harpoon:list():select(1)
+end, { desc = 'Select Harpoon 1' })
+vim.keymap.set('n', '<C-m>', function()
+  harpoon:list():select(2)
+end, { desc = 'Select Harpoon 2' })
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 -- vim: ts=2 sts=2 sw=2 et
