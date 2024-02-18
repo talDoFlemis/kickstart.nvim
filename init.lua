@@ -589,6 +589,16 @@ require('lazy').setup({
       require('harpoon').setup {}
     end,
   },
+
+  -- Oil
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('oil').setup {}
+    end,
+  },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -1043,9 +1053,12 @@ vim.keymap.set('n', '<leader>tr', ':TroubleToggle<cr>', { desc = 'Trouble Toggle
 vim.keymap.set('n', '<leader>fr', require('telescope.builtin').lsp_references, { desc = '[F]ind [R]eferences' })
 vim.keymap.set('n', '<leader>fi', require('telescope.builtin').lsp_implementations, { desc = '[F]ind [I]mplementation' })
 vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
-vim.keymap.set('n', '<leader>fs', require('telescope.builtin').lsp_dynamic_workspace_symbols, { desc = '[F]ind [S]ymbols' })
-vim.keymap.set('n', '<leader>fic', require('telescope.builtin').lsp_incoming_calls, { desc = '[F]ind [I]ncoming [C]alls' })
-vim.keymap.set('n', '<leader>foc', require('telescope.builtin').lsp_outgoing_calls, { desc = '[F]ind [O]utgoing [C]alls' })
+vim.keymap.set('n', '<leader>fs', require('telescope.builtin').lsp_dynamic_workspace_symbols,
+  { desc = '[F]ind [S]ymbols' })
+vim.keymap.set('n', '<leader>fic', require('telescope.builtin').lsp_incoming_calls,
+  { desc = '[F]ind [I]ncoming [C]alls' })
+vim.keymap.set('n', '<leader>foc', require('telescope.builtin').lsp_outgoing_calls,
+  { desc = '[F]ind [O]utgoing [C]alls' })
 
 -- Harpoon mappings
 local harpoon = require 'harpoon'
