@@ -390,6 +390,7 @@ require('lazy').setup({
       'yaml',
       'yml',
       'terraform',
+      'java',
     },
     config = function()
       local mason_path = os.getenv 'MASON'
@@ -403,6 +404,7 @@ require('lazy').setup({
             vim.fn.expand(mason_path .. '/share/sonarlint-analyzers/sonarcfamily.jar'),
             vim.fn.expand(mason_path .. '/share/sonarlint-analyzers/sonargo.jar'),
             vim.fn.expand(mason_path .. '/share/sonarlint-analyzers/sonariac.jar'),
+            vim.fn.expand(mason_path .. '/share/sonarlint-analyzers/sonarjava.jar'),
           },
         },
         filetypes = {
@@ -413,6 +415,7 @@ require('lazy').setup({
           'yaml',
           'yml',
           'terraform',
+          'java',
         },
       }
     end,
