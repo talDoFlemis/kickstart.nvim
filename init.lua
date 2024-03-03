@@ -602,6 +602,13 @@ require('lazy').setup({
       require('oil').setup {}
     end,
   },
+
+  -- JDTLS
+  {
+    'mfussenegger/nvim-jdtls',
+    ft = { 'java' },
+  },
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -987,6 +994,8 @@ mason_lspconfig.setup_handlers {
       filetypes = (servers[server_name] or {}).filetypes,
     }
   end,
+
+  ['jdtls'] = function() end,
 }
 
 -- [[ Configure nvim-cmp ]]
@@ -1045,9 +1054,9 @@ cmp.setup {
 }
 
 -- Tests mappings
-vim.keymap.set('n', '<leader>tf', ':lua require("neotest").run.run(vim.fn.expand("%"))<cr>', { desc = 'Test file' })
-vim.keymap.set('n', '<leader>tn', ':lua require("neotest").run.run()<cr>', { desc = 'Test nearest test' })
-vim.keymap.set('n', '<leader>ts', ':lua require("neotest").summary.toggle()<cr>', { desc = 'Test nearest test' })
+vim.keymap.set('n', '<leader>tf', ':lua require("neotest").run.run(vim.fn.expand("%"))<cr>', { desc = '[T]est [F]ile' })
+vim.keymap.set('n', '<leader>tn', ':lua require("neotest").run.run()<cr>', { desc = '[T]est [N]earest test' })
+vim.keymap.set('n', '<leader>ts', ':lua require("neotest").summary.toggle()<cr>', { desc = '[T]est [S]ummary' })
 
 -- Trouble mappings
 vim.keymap.set('n', '<leader>tr', ':TroubleToggle<cr>', { desc = 'Trouble Toggle' })
