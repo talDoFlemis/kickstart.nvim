@@ -609,6 +609,15 @@ require('lazy').setup({
     ft = { 'java' },
   },
 
+  {
+    'iamcco/markdown-preview.nvim',
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    build = 'cd app && npm install',
+    init = function()
+      vim.g.mkdp_filetypes = { 'markdown' }
+    end,
+    ft = { 'markdown' },
+  },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -1077,15 +1086,21 @@ local harpoon = require 'harpoon'
 vim.keymap.set('n', '<leader>ha', function()
   harpoon:list():append()
 end)
-vim.keymap.set('n', '<C-e>', function()
+vim.keymap.set('n', '<C-t>', function()
   harpoon.ui:toggle_quick_menu(harpoon:list())
 end, { desc = 'Open harpoon window' })
-vim.keymap.set('n', '<C-n>', function()
+vim.keymap.set('n', '<C-q>', function()
   harpoon:list():select(1)
 end, { desc = 'Select Harpoon 1' })
-vim.keymap.set('n', '<C-m>', function()
+vim.keymap.set('n', '<C-w>', function()
   harpoon:list():select(2)
 end, { desc = 'Select Harpoon 2' })
+vim.keymap.set('n', '<C-e>', function()
+  harpoon:list():select(3)
+end, { desc = 'Select Harpoon 3' })
+
+-- Oil
+vim.keymap.set('n', '-', '<cmd>Oil<cr>', { desc = 'Toggle Oil' })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
