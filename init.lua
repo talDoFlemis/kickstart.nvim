@@ -272,6 +272,7 @@ require('lazy').setup({
     dependencies = {
       'antoinemadec/FixCursorHold.nvim',
       { 'nvim-neotest/neotest-go', ft = { 'go' } },
+      { 'rcasia/neotest-java',     ft = { 'java' } },
     },
     ft = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'rust', 'go', 'java' },
     config = function()
@@ -286,6 +287,7 @@ require('lazy').setup({
         adapters = {
           require 'rustaceanvim.neotest',
           require 'neotest-go',
+          require 'neotest-java',
         },
       }
     end,
@@ -618,6 +620,22 @@ require('lazy').setup({
     end,
     ft = { 'markdown' },
   },
+
+  {
+    'ray-x/go.nvim',
+    dependencies = { -- optional packages
+      'ray-x/guihua.lua',
+      'neovim/nvim-lspconfig',
+      'nvim-treesitter/nvim-treesitter',
+    },
+    config = function()
+      require('go').setup()
+    end,
+    event = { 'CmdlineEnter' },
+    ft = { 'go', 'gomod' },
+    build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
+  },
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -886,6 +904,14 @@ vim.defer_fn(function()
   }
 end, 0)
 
+local nmap = function(keys, func, desc)
+  if desc then
+    desc = 'LSP: ' .. desc
+  end
+
+  vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+end
+
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
@@ -895,13 +921,6 @@ local on_attach = function(_, bufnr)
   --
   -- In this case, we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
-  local nmap = function(keys, func, desc)
-    if desc then
-      desc = 'LSP: ' .. desc
-    end
-
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-  end
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
@@ -914,7 +933,6 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
@@ -1101,6 +1119,12 @@ end, { desc = 'Select Harpoon 3' })
 
 -- Oil
 vim.keymap.set('n', '-', '<cmd>Oil<cr>', { desc = 'Toggle Oil' })
+
+nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
