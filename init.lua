@@ -636,10 +636,17 @@ require('lazy').setup({
     build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
   {
-    "FabijanZulj/blame.nvim",
+    'FabijanZulj/blame.nvim',
     config = function()
-      require("blame").setup()
-    end
+      require('blame').setup()
+    end,
+  },
+  {
+    'akinsho/flutter-tools.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'stevearc/dressing.nvim',
+    },
   },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
