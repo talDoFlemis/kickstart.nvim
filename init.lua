@@ -585,16 +585,6 @@ require('lazy').setup({
     dependencies = { { 'nvim-tree/nvim-web-devicons' } },
   },
 
-  -- Harpoon
-  {
-    'ThePrimeagen/harpoon',
-    branch = 'harpoon2',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      require('harpoon').setup {}
-    end,
-  },
-
   -- Oil
   {
     'stevearc/oil.nvim',
@@ -1111,24 +1101,6 @@ vim.keymap.set('n', '<leader>fic', require('telescope.builtin').lsp_incoming_cal
   { desc = '[F]ind [I]ncoming [C]alls' })
 vim.keymap.set('n', '<leader>foc', require('telescope.builtin').lsp_outgoing_calls,
   { desc = '[F]ind [O]utgoing [C]alls' })
-
--- Harpoon mappings
-local harpoon = require 'harpoon'
-vim.keymap.set('n', '<leader>ha', function()
-  harpoon:list():append()
-end)
-vim.keymap.set('n', '<C-t>', function()
-  harpoon.ui:toggle_quick_menu(harpoon:list())
-end, { desc = 'Open harpoon window' })
-vim.keymap.set('n', '<C-q>', function()
-  harpoon:list():select(1)
-end, { desc = 'Select Harpoon 1' })
-vim.keymap.set('n', '<C-w>', function()
-  harpoon:list():select(2)
-end, { desc = 'Select Harpoon 2' })
-vim.keymap.set('n', '<C-e>', function()
-  harpoon:list():select(3)
-end, { desc = 'Select Harpoon 3' })
 
 -- Oil
 vim.keymap.set('n', '-', '<cmd>Oil<cr>', { desc = 'Toggle Oil' })
