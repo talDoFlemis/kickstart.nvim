@@ -198,7 +198,7 @@ require('lazy').setup({
     config = function()
       require('catppuccin').setup {
         flavour = 'macchiato',
-        transparent_background = true,
+        transparent_background = false,
         integrations = {
           notify = true,
         },
@@ -486,12 +486,8 @@ require('lazy').setup({
         b.formatting.prettierd.with { extra_filetypes = { 'astro', 'ansible' } },
 
         -- Python
-        b.diagnostics.ruff,
         b.formatting.isort,
-        b.formatting.pyflyby,
         b.formatting.ruff_format,
-
-        b.formatting.rustfmt,
 
         -- Go
         b.formatting.gofmt,
@@ -506,15 +502,11 @@ require('lazy').setup({
 
         -- Shell
         b.formatting.shfmt,
-        b.diagnostics.shellcheck.with { diagnostics_format = '#{m} [#{c}]' },
 
         -- C#
         b.formatting.csharpier,
 
         b.formatting.ocamlformat,
-
-        -- sql
-        b.formatting.pg_format,
 
         -- Dev OmegaLUL OPS
         b.formatting.terraform_fmt,
@@ -523,7 +515,7 @@ require('lazy').setup({
         b.diagnostics.tfsec,
 
         -- Nix
-        b.formatting.nixfmt,
+        b.formatting.nixpkgs_fmt,
       }
 
       local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
@@ -637,6 +629,9 @@ require('lazy').setup({
       'nvim-lua/plenary.nvim',
       'stevearc/dressing.nvim',
     },
+  },
+  {
+    'mbbill/undotree'
   },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
@@ -999,6 +994,13 @@ local servers = {
       -- diagnostics = { disable = { 'missing-fields' } },
     },
   },
+  nil_ls = {
+    ['nil'] = {
+      formatting = {
+        command = { "nixpkgs-fmt" },
+      },
+    },
+  },
 }
 
 -- Setup neovim lua configuration
@@ -1077,11 +1079,17 @@ cmp.setup {
     { name = 'copilot' },
     { name = 'nvim_lsp' },
     { name = 'crates' },
-    { name = 'vim-dadbod-completion' },
     { name = 'luasnip' },
     { name = 'path' },
   },
 }
+
+cmp.setup.filetype({ "sql" }, {
+  sources = {
+    { name = 'vim-dadbod-completion' },
+    { name = 'buffer' },
+  },
+})
 
 -- Tests mappings
 vim.keymap.set('n', '<leader>tf', ':lua require("neotest").run.run(vim.fn.expand("%"))<cr>', { desc = '[T]est [F]ile' })
@@ -1104,6 +1112,9 @@ vim.keymap.set('n', '<leader>foc', require('telescope.builtin').lsp_outgoing_cal
 
 -- Oil
 vim.keymap.set('n', '-', '<cmd>Oil<cr>', { desc = 'Toggle Oil' })
+
+--- UndoTree
+vim.keymap.set('n', '<F1>', '<cmd>UndotreeToggle<cr>', { desc = 'Toggle UndoTree' })
 
 nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
