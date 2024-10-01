@@ -1043,9 +1043,6 @@ local servers = {
       -- diagnostics = { disable = { 'missing-fields' } },
     },
   },
-  erb_formatter = {
-    filetypes = { "eruby", "erb" }
-  },
   nil_ls = {
     ['nil'] = {
       formatting = {
