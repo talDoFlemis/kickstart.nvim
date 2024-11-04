@@ -671,6 +671,7 @@ require('lazy').setup({
   {
     'mbbill/undotree'
   },
+  { 'towolf/vim-helm', ft = 'helm' },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -731,14 +732,14 @@ vim.o.termguicolors = true
 -- Set relative numbers
 vim.opt.relativenumber = true
 
-vim.filetype.add {
-  pattern = {
-    ['.*/.*playbook.*.ya?ml'] = 'yaml.ansible',
-    ['.*/.*tasks.*/.*ya?ml'] = 'yaml.ansible',
-    ['.*/local.ya?ml'] = 'yaml.ansible',
-    ['*.templ'] = 'templ',
-  },
-}
+-- vim.filetype.add {
+--   pattern = {
+--     ['.*/.*playbook.*.ya?ml'] = 'yaml.ansible',
+--     ['.*/.*tasks.*/.*ya?ml'] = 'yaml.ansible',
+--     ['.*/local.ya?ml'] = 'yaml.ansible',
+--     ['*.templ'] = 'templ',
+--   },
+-- }
 
 -- Set max column size for better space
 vim.opt.colorcolumn = '100'
@@ -1050,6 +1051,13 @@ local servers = {
       },
     },
   },
+  helm_ls = {
+    ['helm-ls'] = {
+      yamlls = {
+        path = "yaml-language-server",
+      }
+    }
+  },
 }
 
 -- Setup neovim lua configuration
@@ -1178,6 +1186,7 @@ nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
+vim.g.copilot_enabled = false
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
