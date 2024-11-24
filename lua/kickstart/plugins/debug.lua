@@ -26,6 +26,13 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    {
+      'mfussenegger/nvim-dap-python',
+      config = function()
+        require("dap-python").setup(vim.g.python_host_prog)
+        require("dap-python").test_runner = "pytest"
+      end,
+    },
   },
   config = function()
     local dap = require 'dap'

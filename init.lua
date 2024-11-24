@@ -271,10 +271,11 @@ require('lazy').setup({
     'nvim-neotest/neotest',
     dependencies = {
       'antoinemadec/FixCursorHold.nvim',
-      { 'nvim-neotest/neotest-go', ft = { 'go' } },
-      { 'rcasia/neotest-java',     ft = { 'java' } },
+      { 'nvim-neotest/neotest-go',     ft = { 'go' } },
+      { 'rcasia/neotest-java',         ft = { 'java' } },
+      { 'nvim-neotest/neotest-python', ft = { 'python' } },
     },
-    ft = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'rust', 'go', 'java' },
+    ft = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'rust', 'go', 'java', 'python' },
     config = function()
       require('neotest').setup {
         icons = {
@@ -288,6 +289,7 @@ require('lazy').setup({
           require 'rustaceanvim.neotest',
           require 'neotest-go',
           require 'neotest-java',
+          require 'neotest-python',
         },
       }
     end,
@@ -491,6 +493,9 @@ require('lazy').setup({
     event = 'InsertEnter',
     config = function()
       require('copilot').setup {
+        filetypes = {
+          yaml = true,
+        },
         suggestion = {
           auto_trigger = true,
         },
@@ -673,22 +678,13 @@ require('lazy').setup({
   },
   { 'towolf/vim-helm', ft = 'helm' },
   {
-    'linux-cultist/venv-selector.nvim',
-    dependencies = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
-    opts = {
-      -- Your options go here
-      -- name = "venv",
-      -- auto_refresh = false
-    },
-    event = 'VeryLazy', -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
-    -- keys = {
-    --   -- Keymap to open VenvSelector to pick a venv.
-    --   { '<leader>vs', '<cmd>VenvSelect<cr>' },
-    --   -- Keymap to retrieve the venv from a cache (the one previously used for the same project directory).
-    --   { '<leader>vc', '<cmd>VenvSelectCached<cr>' },
-    -- },
+    'chomosuke/typst-preview.nvim',
+    ft = 'typst',
+    version = '1.*',
+    config = function()
+      require 'typst-preview'.setup {}
+    end,
   },
-
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
