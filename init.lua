@@ -526,7 +526,7 @@ require('lazy').setup({
 
         -- Python
         b.formatting.isort,
-        b.formatting.ruff_format,
+        -- b.formatting.ruff_format,
 
         -- Go
         b.formatting.gofmt,
@@ -559,6 +559,8 @@ require('lazy').setup({
         -- Ruby
         b.diagnostics.erb_lint,
         b.formatting.erb_format,
+        -- Typst
+        b.formatting.typstfmt,
       }
 
       local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
@@ -684,6 +686,64 @@ require('lazy').setup({
     config = function()
       require 'typst-preview'.setup {}
     end,
+  },
+  {
+    "ThePrimeagen/refactoring.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    lazy = false,
+    config = function()
+      require("telescope").load_extension("refactoring")
+      require("refactoring").setup()
+    end,
+  },
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    lazy = false,
+    version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+    opts = {
+      provider = "copilot",
+    },
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    build = "make",
+    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    dependencies = {
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "hrsh7th/nvim-cmp",          -- autocompletion for avante commands and mentions
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      "zbirenbaum/copilot.lua",    -- for providers='copilot'
+      {
+        -- support for image pasting
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          -- recommended settings
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+            -- required for Windows users
+            use_absolute_path = true,
+          },
+        },
+      },
+      {
+        -- Make sure to set this up properly if you have lazy=true
+        'MeanderingProgrammer/render-markdown.nvim',
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+      },
+    },
   },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -1049,26 +1109,40 @@ local servers = {
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-      -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-      -- diagnostics = { disable = { 'missing-fields' } },
-    },
+    settings = {
+      Lua = {
+        workspace = { checkThirdParty = false },
+        telemetry = { enable = false },
+        -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+        -- diagnostics = { disable = { 'missing-fields' } },
+      },
+    }
   },
   nil_ls = {
-    ['nil'] = {
-      formatting = {
-        command = { "nixpkgs-fmt" },
+    settings = {
+      ['nil'] = {
+        formatting = {
+          command = { "nixpkgs-fmt" },
+        },
       },
-    },
+    }
   },
   helm_ls = {
-    ['helm-ls'] = {
-      yamlls = {
-        path = "yaml-language-server",
+    settings = {
+      ['helm-ls'] = {
+        yamlls = {
+          path = "yaml-language-server",
+        }
       }
-    }
+    },
+  },
+  tinymist = {
+    settings = {},
+    single_file_support = true,
+    root_dir = function()
+      local cwd = vim.fn.getcwd()
+      return cwd
+    end,
   },
 }
 
@@ -1091,7 +1165,9 @@ mason_lspconfig.setup_handlers {
     require('lspconfig')[server_name].setup {
       capabilities = capabilities,
       on_attach = on_attach,
-      settings = servers[server_name],
+      root_dir = (servers[server_name] and servers[server_name].root_dir) or '',
+      single_file_support = (servers[server_name] and servers[server_name].single_file_support) or false,
+      settings = (servers[server_name] or {}).settings,
       filetypes = (servers[server_name] or {}).filetypes,
     }
   end,
@@ -1195,6 +1271,8 @@ vim.keymap.set('n', '<F1>', '<cmd>UndotreeToggle<cr>', { desc = 'Toggle UndoTree
 
 nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+
+-- Refactoring
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4

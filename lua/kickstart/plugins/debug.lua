@@ -77,52 +77,6 @@ return {
         repl = 'r',
         toggle = 't',
       },
-      expand_lines = vim.fn.has 'nvim-0.7',
-      controls = {
-        enabled = true,
-        element = 'repl',
-        icons = {
-          pause = '',
-          play = '',
-          step_into = '',
-          step_over = '',
-          step_out = '',
-          step_back = '',
-          run_last = '󰑓',
-          terminate = '',
-        },
-      },
-      layouts = {
-        {
-          elements = {
-            { id = 'scopes',      size = 0.75 },
-            { id = 'watches',     size = 0.2 },
-            { id = 'breakpoints', size = 0.05 },
-          },
-          size = 30,
-          position = 'left',
-        },
-        {
-          elements = {
-            'repl',
-            'console',
-          },
-          size = 10,
-          position = 'bottom',
-        },
-      },
-      floating = {
-        max_height = nil,  -- These can be integers or a float between 0 and 1.
-        max_width = nil,   -- Floats will be treated as percentage of your screen.
-        border = 'single', -- Border style. Can be "single", "double" or "rounded"
-        mappings = {
-          close = { 'q', '<Esc>' },
-        },
-      },
-      windows = { indent = 1 },
-      render = {
-        max_type_length = nil, -- Can be integer or nil.
-      },
     }
 
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
