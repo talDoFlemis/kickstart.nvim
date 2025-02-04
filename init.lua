@@ -1286,6 +1286,9 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.g.copilot_enabled = false
 
+vim.api.nvim_set_keymap("v", "<", "<gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true, silent = true })
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 -- vim: ts=2 sts=2 sw=2 et
