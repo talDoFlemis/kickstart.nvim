@@ -678,15 +678,15 @@ require('lazy').setup({
   {
     'mbbill/undotree'
   },
-  {
-    "qvalentin/helm-ls.nvim",
-    ft = "helm",
-    opts = {
-      conceal_templates = {
-        enabled = true,
-      },
-    }
-  },
+  -- {
+  --   "qvalentin/helm-ls.nvim",
+  --   ft = "helm",
+  --   opts = {
+  --     conceal_templates = {
+  --       enabled = true,
+  --     },
+  --   }
+  -- },
   {
     'chomosuke/typst-preview.nvim',
     ft = 'typst',
@@ -1145,15 +1145,15 @@ local servers = {
       },
     }
   },
-  helm_ls = {
-    settings = {
-      ['helm-ls'] = {
-        yamlls = {
-          path = "yaml-language-server",
-        }
-      }
-    },
-  },
+  -- helm_ls = {
+  --   settings = {
+  --     ['helm-ls'] = {
+  --       yamlls = {
+  --         path = "yaml-language-server",
+  --       }
+  --     }
+  --   },
+  -- },
   tinymist = {
     settings = {},
     single_file_support = true,
