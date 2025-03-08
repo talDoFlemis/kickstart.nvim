@@ -271,9 +271,9 @@ require('lazy').setup({
     'nvim-neotest/neotest',
     dependencies = {
       'antoinemadec/FixCursorHold.nvim',
-      { 'nvim-neotest/neotest-go',     ft = { 'go' } },
-      { 'rcasia/neotest-java',         ft = { 'java' } },
-      { 'nvim-neotest/neotest-python', ft = { 'python' } },
+      { "fredrikaverpil/neotest-golang", version = "*",    ft = { "go" } },
+      { 'rcasia/neotest-java',           ft = { 'java' } },
+      { 'nvim-neotest/neotest-python',   ft = { 'python' } },
     },
     ft = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'rust', 'go', 'java', 'python' },
     config = function()
@@ -287,7 +287,7 @@ require('lazy').setup({
         },
         adapters = {
           require 'rustaceanvim.neotest',
-          require 'neotest-go',
+          require('neotest-golang')({ runner = "gotestsum" }),
           require 'neotest-java',
           require 'neotest-python',
         },
@@ -714,6 +714,9 @@ require('lazy').setup({
     version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     opts = {
       provider = "claude",
+      claude = {
+        model = "claude-3-7-sonnet-20250219",
+      },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = "make",
@@ -762,6 +765,9 @@ require('lazy').setup({
       show_icons = true,
       leader_key = ';', -- Recommended to be a single key
     },
+  },
+  {
+    "mg979/vim-visual-multi", branch = "master"
   },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -1299,6 +1305,7 @@ vim.g.copilot_enabled = false
 vim.api.nvim_set_keymap("v", "<", "<gv", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true, silent = true })
 vim.cmd(":Copilot disable")
+vim.opt.laststatus = 3
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
