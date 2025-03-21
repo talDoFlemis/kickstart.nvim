@@ -716,6 +716,8 @@ require('lazy').setup({
       provider = 'claude',
       claude = {
         model = 'claude-3-5-sonnet-20241022',
+        max_tokens = 8192,
+        disable_tools = true,
       },
       behavior = {
         enable_claude_text_editor_tool_mode = true,
