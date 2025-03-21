@@ -271,7 +271,7 @@ require('lazy').setup({
     'nvim-neotest/neotest',
     dependencies = {
       'antoinemadec/FixCursorHold.nvim',
-      { "fredrikaverpil/neotest-golang", version = "*",    ft = { "go" } },
+      { 'fredrikaverpil/neotest-golang', version = '*',    ft = { 'go' } },
       { 'rcasia/neotest-java',           ft = { 'java' } },
       { 'nvim-neotest/neotest-python',   ft = { 'python' } },
     },
@@ -287,7 +287,7 @@ require('lazy').setup({
         },
         adapters = {
           require 'rustaceanvim.neotest',
-          require('neotest-golang')({ runner = "gotestsum" }),
+          require 'neotest-golang' { runner = 'gotestsum' },
           require 'neotest-java',
           require 'neotest-python',
         },
@@ -358,39 +358,39 @@ require('lazy').setup({
   },
   -- Trouble
   {
-    "folke/trouble.nvim",
+    'folke/trouble.nvim',
     opts = {}, -- for default options, refer to the configuration section for custom setup.
-    cmd = "Trouble",
+    cmd = 'Trouble',
     keys = {
       {
-        "<leader>xx",
-        "<cmd>Trouble diagnostics toggle<cr>",
-        desc = "Diagnostics (Trouble)",
+        '<leader>xx',
+        '<cmd>Trouble diagnostics toggle<cr>',
+        desc = 'Diagnostics (Trouble)',
       },
       {
-        "<leader>xX",
-        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-        desc = "Buffer Diagnostics (Trouble)",
+        '<leader>xX',
+        '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
+        desc = 'Buffer Diagnostics (Trouble)',
       },
       {
-        "<leader>cs",
-        "<cmd>Trouble symbols toggle focus=false<cr>",
-        desc = "Symbols (Trouble)",
+        '<leader>cs',
+        '<cmd>Trouble symbols toggle focus=false<cr>',
+        desc = 'Symbols (Trouble)',
       },
       {
-        "<leader>cl",
-        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-        desc = "LSP Definitions / references / ... (Trouble)",
+        '<leader>cl',
+        '<cmd>Trouble lsp toggle focus=false win.position=right<cr>',
+        desc = 'LSP Definitions / references / ... (Trouble)',
       },
       {
-        "<leader>xL",
-        "<cmd>Trouble loclist toggle<cr>",
-        desc = "Location List (Trouble)",
+        '<leader>xL',
+        '<cmd>Trouble loclist toggle<cr>',
+        desc = 'Location List (Trouble)',
       },
       {
-        "<leader>xQ",
-        "<cmd>Trouble qflist toggle<cr>",
-        desc = "Quickfix List (Trouble)",
+        '<leader>xQ',
+        '<cmd>Trouble qflist toggle<cr>',
+        desc = 'Quickfix List (Trouble)',
       },
     },
   },
@@ -676,7 +676,7 @@ require('lazy').setup({
     },
   },
   {
-    'mbbill/undotree'
+    'mbbill/undotree',
   },
   -- {
   --   "qvalentin/helm-ls.nvim",
@@ -692,47 +692,51 @@ require('lazy').setup({
     ft = 'typst',
     version = '1.*',
     config = function()
-      require 'typst-preview'.setup {}
+      require('typst-preview').setup {}
     end,
   },
   {
-    "ThePrimeagen/refactoring.nvim",
+    'ThePrimeagen/refactoring.nvim',
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
     },
     lazy = false,
     config = function()
-      require("telescope").load_extension("refactoring")
-      require("refactoring").setup()
+      require('telescope').load_extension 'refactoring'
+      require('refactoring').setup()
     end,
   },
   {
-    "yetone/avante.nvim",
-    event = "VeryLazy",
+    'yetone/avante.nvim',
+    event = 'VeryLazy',
     lazy = false,
     version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     opts = {
-      provider = "claude",
+      provider = 'claude',
       claude = {
-        model = "claude-3-7-sonnet-20250219",
+        reasoning_effort = 'low',
+        model = 'claude-3-5-sonnet-20241019',
+      },
+      behavior = {
+        enable_claude_text_editor_tool_mode = true,
       },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = "make",
+    build = 'make',
     -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
     dependencies = {
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
+      'stevearc/dressing.nvim',
+      'nvim-lua/plenary.nvim',
+      'MunifTanjim/nui.nvim',
       --- The below dependencies are optional,
-      "hrsh7th/nvim-cmp",            -- autocompletion for avante commands and mentions
-      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-      "zbirenbaum/copilot.lua",      -- for providers='copilot'
+      'hrsh7th/nvim-cmp',            -- autocompletion for avante commands and mentions
+      'nvim-tree/nvim-web-devicons', -- or echasnovski/mini.icons
+      'zbirenbaum/copilot.lua',      -- for providers='copilot'
       {
         -- support for image pasting
-        "HakonHarnes/img-clip.nvim",
-        event = "VeryLazy",
+        'HakonHarnes/img-clip.nvim',
+        event = 'VeryLazy',
         opts = {
           -- recommended settings
           default = {
@@ -750,16 +754,16 @@ require('lazy').setup({
         -- Make sure to set this up properly if you have lazy=true
         'MeanderingProgrammer/render-markdown.nvim',
         opts = {
-          file_types = { "markdown", "Avante" },
+          file_types = { 'markdown', 'Avante' },
         },
-        ft = { "markdown", "Avante" },
+        ft = { 'markdown', 'Avante' },
       },
     },
   },
   {
-    "otavioschwanck/arrow.nvim",
+    'otavioschwanck/arrow.nvim',
     dependencies = {
-      { "nvim-tree/nvim-web-devicons" },
+      { 'nvim-tree/nvim-web-devicons' },
     },
     opts = {
       show_icons = true,
@@ -767,36 +771,37 @@ require('lazy').setup({
     },
   },
   {
-    "mg979/vim-visual-multi", branch = "master"
+    'mg979/vim-visual-multi',
+    branch = 'master',
   },
   {
-    "jellydn/hurl.nvim",
+    'jellydn/hurl.nvim',
     dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
+      'MunifTanjim/nui.nvim',
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
       -- Optional, for markdown rendering with render-markdown.nvim
       {
         'MeanderingProgrammer/render-markdown.nvim',
         opts = {
-          file_types = { "markdown" },
+          file_types = { 'markdown' },
         },
-        ft = { "markdown" },
+        ft = { 'markdown' },
       },
     },
-    ft = "hurl",
+    ft = 'hurl',
     opts = {
       -- Show debugging info
       debug = false,
       -- Show notification on run
       show_notification = false,
       -- Show response in popup or split
-      mode = "split",
+      mode = 'split',
       -- Default formatter
       formatters = {
         json = { 'jq' }, -- Make sure you have install jq in your system, e.g: brew install jq
         html = {
-          'prettier',  -- Make sure you have install prettier in your system, e.g: npm install -g prettier
+          'prettier',    -- Make sure you have install prettier in your system, e.g: npm install -g prettier
           '--parser',
           'html',
         },
@@ -809,22 +814,22 @@ require('lazy').setup({
       },
       -- Default mappings for the response popup or split views
       mappings = {
-        close = 'q',        -- Close the response popup or split view
+        close = 'q',          -- Close the response popup or split view
         next_panel = '<C-n>', -- Move to the next response popup window
         prev_panel = '<C-p>', -- Move to the previous response popup window
       },
     },
     keys = {
       -- Run API request
-      { "<leader>A",  "<cmd>HurlRunner<CR>",        desc = "Run All requests" },
-      { "<leader>a",  "<cmd>HurlRunnerAt<CR>",      desc = "Run Api request" },
-      { "<leader>te", "<cmd>HurlRunnerToEntry<CR>", desc = "Run Api request to entry" },
-      { "<leader>tE", "<cmd>HurlRunnerToEnd<CR>",   desc = "Run Api request from current entry to end" },
-      { "<leader>tm", "<cmd>HurlToggleMode<CR>",    desc = "Hurl Toggle Mode" },
-      { "<leader>tv", "<cmd>HurlVerbose<CR>",       desc = "Run Api in verbose mode" },
-      { "<leader>tV", "<cmd>HurlVeryVerbose<CR>",   desc = "Run Api in very verbose mode" },
+      { '<leader>A',  '<cmd>HurlRunner<CR>',        desc = 'Run All requests' },
+      { '<leader>a',  '<cmd>HurlRunnerAt<CR>',      desc = 'Run Api request' },
+      { '<leader>te', '<cmd>HurlRunnerToEntry<CR>', desc = 'Run Api request to entry' },
+      { '<leader>tE', '<cmd>HurlRunnerToEnd<CR>',   desc = 'Run Api request from current entry to end' },
+      { '<leader>tm', '<cmd>HurlToggleMode<CR>',    desc = 'Hurl Toggle Mode' },
+      { '<leader>tv', '<cmd>HurlVerbose<CR>',       desc = 'Run Api in verbose mode' },
+      { '<leader>tV', '<cmd>HurlVeryVerbose<CR>',   desc = 'Run Api in very verbose mode' },
       -- Run Hurl request in visual mode
-      { "<leader>h",  ":HurlRunner<CR>",            desc = "Hurl Runner",                              mode = "v" },
+      { '<leader>h',  ':HurlRunner<CR>',            desc = 'Hurl Runner',                              mode = 'v' },
     },
   },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
@@ -1141,32 +1146,30 @@ local on_attach = function(_, bufnr)
 end
 
 -- document existing key chains
-require('which-key').add
-{
-  { "<leader>c",  group = "[C]ode" },
-  { "<leader>c_", hidden = true },
-  { "<leader>d",  group = "[D]ocument" },
-  { "<leader>d_", hidden = true },
-  { "<leader>f",  group = "[F]ind" },
-  { "<leader>f_", hidden = true },
-  { "<leader>g",  group = "[G]it" },
-  { "<leader>g_", hidden = true },
-  { "<leader>h",  group = "Git [H]unk" },
-  { "<leader>h_", hidden = true },
-  { "<leader>r",  group = "[R]ename" },
-  { "<leader>r_", hidden = true },
-  { "<leader>t",  group = "[T]oggle" },
-  { "<leader>t_", hidden = true },
-  { "<leader>w",  group = "[W]orkspace" },
-  { "<leader>w_", hidden = true },
+require('which-key').add {
+  { '<leader>c',  group = '[C]ode' },
+  { '<leader>c_', hidden = true },
+  { '<leader>d',  group = '[D]ocument' },
+  { '<leader>d_', hidden = true },
+  { '<leader>f',  group = '[F]ind' },
+  { '<leader>f_', hidden = true },
+  { '<leader>g',  group = '[G]it' },
+  { '<leader>g_', hidden = true },
+  { '<leader>h',  group = 'Git [H]unk' },
+  { '<leader>h_', hidden = true },
+  { '<leader>r',  group = '[R]ename' },
+  { '<leader>r_', hidden = true },
+  { '<leader>t',  group = '[T]oggle' },
+  { '<leader>t_', hidden = true },
+  { '<leader>w',  group = '[W]orkspace' },
+  { '<leader>w_', hidden = true },
 }
 
 -- register which-key VISUAL mode
 -- required for visual <leader>hs (hunk stage) to work
-require('which-key').add
-{
-  { "<leader>",  group = "VISUAL <leader>", mode = "v" },
-  { "<leader>h", desc = "Git [H]unk",       mode = "v" },
+require('which-key').add {
+  { '<leader>',  group = 'VISUAL <leader>', mode = 'v' },
+  { '<leader>h', desc = 'Git [H]unk',       mode = 'v' },
 }
 
 -- mason-lspconfig requires that these setup functions are called in this order
@@ -1198,16 +1201,16 @@ local servers = {
         -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
         -- diagnostics = { disable = { 'missing-fields' } },
       },
-    }
+    },
   },
   nil_ls = {
     settings = {
       ['nil'] = {
         formatting = {
-          command = { "nixpkgs-fmt" },
+          command = { 'nixpkgs-fmt' },
         },
       },
-    }
+    },
   },
   -- helm_ls = {
   --   settings = {
@@ -1311,7 +1314,7 @@ cmp.setup {
   },
 }
 
-cmp.setup.filetype({ "sql" }, {
+cmp.setup.filetype({ 'sql' }, {
   sources = {
     { name = 'vim-dadbod-completion' },
     { name = 'buffer' },
@@ -1360,9 +1363,9 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.g.copilot_enabled = false
 
-vim.api.nvim_set_keymap("v", "<", "<gv", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true, silent = true })
-vim.cmd(":Copilot disable")
+vim.api.nvim_set_keymap('v', '<', '<gv', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '>', '>gv', { noremap = true, silent = true })
+vim.cmd ':Copilot disable'
 vim.opt.laststatus = 3
 
 -- The line beneath this is called `modeline`. See `:help modeline`
