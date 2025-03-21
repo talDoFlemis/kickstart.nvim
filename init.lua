@@ -715,7 +715,6 @@ require('lazy').setup({
     opts = {
       provider = 'claude',
       claude = {
-        reasoning_effort = 'low',
         model = 'claude-3-5-sonnet-20241019',
       },
       behavior = {
