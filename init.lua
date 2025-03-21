@@ -715,7 +715,7 @@ require('lazy').setup({
     opts = {
       provider = 'claude',
       claude = {
-        model = 'claude-3-5-sonnet-20241019',
+        model = 'claude-3-5-sonnet-20241022',
       },
       behavior = {
         enable_claude_text_editor_tool_mode = true,
