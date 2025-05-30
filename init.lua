@@ -657,6 +657,7 @@ require('lazy').setup({
     },
     config = function()
       require('go').setup()
+      vim.keymap.set('n', '<leader>ge', '<cmd>GoIfErr<cr>', { desc = 'Generate Go If Err' })
     end,
     event = { 'CmdlineEnter' },
     ft = { 'go', 'gomod' },
@@ -713,11 +714,25 @@ require('lazy').setup({
     lazy = false,
     version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     opts = {
-      provider = 'claude',
+      provider = 'copilot',
       claude = {
         model = 'claude-3-5-sonnet-20241022',
         max_tokens = 8192,
         disable_tools = true,
+      },
+      ---@type AvanteSupportedProvider
+      copilot = {
+        model = 'claude-3.5-sonnet',
+      },
+      gemini = {
+        model = 'gemini-2.0-flash-lite',
+      },
+      windows = {
+        sidebar_header = {
+          rounded = false,
+          align = 'left',
+        },
+        position = 'left',
       },
       behavior = {
         enable_claude_text_editor_tool_mode = true,
@@ -761,16 +776,16 @@ require('lazy').setup({
       },
     },
   },
-  {
-    'otavioschwanck/arrow.nvim',
-    dependencies = {
-      { 'nvim-tree/nvim-web-devicons' },
-    },
-    opts = {
-      show_icons = true,
-      leader_key = ';', -- Recommended to be a single key
-    },
-  },
+  -- {
+  --   'otavioschwanck/arrow.nvim',
+  --   dependencies = {
+  --     { 'nvim-tree/nvim-web-devicons' },
+  --   },
+  --   opts = {
+  --     show_icons = true,
+  --     leader_key = ';', -- Recommended to be a single key
+  --   },
+  -- },
   {
     'mg979/vim-visual-multi',
     branch = 'master',
@@ -832,6 +847,12 @@ require('lazy').setup({
       -- Run Hurl request in visual mode
       { '<leader>h',  ':HurlRunner<CR>',            desc = 'Hurl Runner',                              mode = 'v' },
     },
+  },
+
+  {
+    'pmizio/typescript-tools.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    opts = {},
   },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
